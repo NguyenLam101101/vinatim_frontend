@@ -14,6 +14,7 @@ import { ButtonGroup } from "../../common/buttonGroup";
 import Banner from "../../common/banner";
 import Post from "../../common/post";
 import Link from "next/link";
+import PopUp from "../../common/popUp";
 
 export default function OrganizationPage({ }) {
     const pathname = usePathname();
