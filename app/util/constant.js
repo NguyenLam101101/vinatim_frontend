@@ -26,7 +26,17 @@ export const ENDPOINT = {
 }
 
 export const POWER_BI = {
-    reportId: "6cc3b9a7-9ef4-4efa-9cdc-6611514a5bc0",
-    groupId: "fcb5a89b-81ab-4843-869f-7e2e7e1b92fe",
-    embedUrl: "https://app.powerbi.com/reportEmbed?reportId=6cc3b9a7-9ef4-4efa-9cdc-6611514a5bc0&groupId=fcb5a89b-81ab-4843-869f-7e2e7e1b92fe"
+    reportId: "a407e210-97e7-49f3-8ff9-2f2cfefb6f61",
+    groupId: "41b0d7d4-7cf5-4458-9dd9-9074b494c968",
+    embedUrl: "https://app.powerbi.com/reportEmbed?reportId=a407e210-97e7-49f3-8ff9-2f2cfefb6f61&groupId=41b0d7d4-7cf5-4458-9dd9-9074b494c968"
+}
+
+export const PAGE_NAME = {
+    ORG_OVERVIEW: "ReportSection",
+    ORG_EVENT: "ReportSectione86abfe0ba70ed12c00c",
+    ADMIN_ORG: "ReportSectionbfb941c51cc24abbd4ce",
+    ADMIN_EVENT: "ReportSection54deac0b940838bc0969",
+    ADMIN_COMPLAINT: "ReportSection3b312ef226803929d13a",
+    ADMIN_TRANSACTION: "ReportSectiondf827803e8c57a30224a",
+    USER_ORG: "ReportSectionb3092ceb1ba537aeecdb"
 }

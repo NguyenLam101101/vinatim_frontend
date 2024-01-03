@@ -8,6 +8,7 @@ import { CONTEXT } from "../../layout";
 import SearchLayout from "../../Layout/searchLayout";
 import FollowOrganizationButton from "../../common/followOrganizationButton";
 import Link from "next/link";
+import { StarIcon } from "../../common/icon";
 
 const initFilter = {
     name: "",

@@ -5,7 +5,7 @@ import { ButtonGroup, ButtonGroupVertical } from "../../../common/buttonGroup";
 import CreateOrganizationForm from "../../../common/createOrganizationForm";
 import InTransactionManagement from "../../../common/inTransactionManagement";
 import { callGetAPI } from "../../../util/callAPI";
-import { ENDPOINT } from "../../../util/constant";
+import { ENDPOINT, PAGE_NAME } from "../../../util/constant";
 import { usePathname } from "next/navigation";
 import OutTransactions from "../../../common/outTransaction";
 import OutTransactionManagement from "../../../common/outTransactionManagement";
@@ -19,6 +19,7 @@ export default function OrganizationPage() {
     const organizationId = pathname.split("/")[3];
     const [organization, setOrganization] = useState();
     const [tab, setTab] = useState(0);
+    const [pageTab, setPageTab] = useState(0);
 
     useEffect(() => {
         callGetAPI(ENDPOINT.getOrganization + organizationId)
@@ -82,91 +83,138 @@ export default function OrganizationPage() {
                     }
                     {
                         tab === 4 &&
-                        <div style={{display: tab === 4 ? "" : "none"}}>
-                            <Dashboard
-                                pageName="ReportSection"
-                                filter={
-                                    [
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap FACT_ORG_FOLLOWERS",
-                                                column: "orgId"
+                        <div style={{ display: tab === 4 ? "" : "none" }}>
+                            <div className="mb-3">
+                                <ButtonGroup options={["Tổng quan", "Sự kiện"]} onClickEvent={index => setPageTab(index)} />
+                            </div>
+                            <div style={{ display: pageTab === 0 ? "" : "none" }}>
+                                <Dashboard
+                                    pageName={PAGE_NAME.ORG_OVERVIEW}
+                                    filter={
+                                        [
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_ORG_FOLLOWERS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap FACT_ORG_REVIEWS",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_ORG_REVIEWS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap DIM_EVENT",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap DIM_EVENT",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap FACT_IN_TRANSACTIONS",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_IN_TRANSACTIONS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap FACT_EVENT",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_EVENT",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap DIM_EVENT_CATEGORY",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap DIM_EVENT_CATEGORY",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                        {
-                                            $schema: "http://powerbi.com/product/schema#advanced",
-                                            target: {
-                                                table: "vinatim_olap DIM_EVENT_DONATETYPE",
-                                                column: "orgId"
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap DIM_EVENT_DONATETYPE",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
                                             },
-                                            operator: "In",
-                                            values: [organization?.id],
-                                            filterType: models.FilterType.BasicFilter,
-                                            requireSingleSelection: true
-                                        },
-                                    ]
-                                }
-                            />
+                                        ]
+                                    }
+                                />
+                            </div>
+                            <div style={{ display: pageTab === 1 ? "" : "none" }}>
+                                <Dashboard
+                                    pageName={PAGE_NAME.ORG_OVERVIEW}
+                                    filter={
+                                        [
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_EVENT_REVIEWS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
+                                            },
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_IN_TRANSACTIONS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
+                                            },
+                                            {
+                                                $schema: "http://powerbi.com/product/schema#advanced",
+                                                target: {
+                                                    table: "vinatim_olap FACT_OUT_TRANSACTIONS",
+                                                    column: "orgId"
+                                                },
+                                                operator: "In",
+                                                values: [organization?.id],
+                                                filterType: models.FilterType.BasicFilter,
+                                                requireSingleSelection: true
+                                            }
+                                        ]
+                                    }
+                                />
+                            </div>
                         </div>
                     }
                 </div>
