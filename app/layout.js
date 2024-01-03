@@ -5,7 +5,7 @@ import './globals.css'
 import { createContext, useEffect, useState } from 'react'
 import 'bootstrap/dist/css/bootstrap.css';
 import "bootstrap-icons/font/bootstrap-icons.css";
-import 'bootstrap/dist/js/bootstrap.bundle.min';
+import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import 'react-notifications/lib/notifications.css';
 import 'react-slideshow-image/dist/styles.css';
 import { callGetAPI } from './util/callAPI';
