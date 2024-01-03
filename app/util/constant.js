@@ -22,7 +22,7 @@ export const ENDPOINT = {
     getOutTransactions: "/public/get-outTransactions?",
     getInTransactions: "/transaction/get-inTransactions?",
     approveInTransaction: "/transaction/in/approve?",
-    getPowerBIEmbedToken: "http://localhost:8082/embed-token?"
+    getPowerBIEmbedToken: "http://34.143.138.70:8082/embed-token?"
 }
 
 export const POWER_BI = {
