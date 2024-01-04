@@ -1,4 +1,4 @@
-// export const APP_SERVER = "http://192.168.124.115:8080";
+// export const APP_SERVER = "http://localhost:8080";
 
 export const APP_SERVER = "http://34.143.138.70:8080";
 
